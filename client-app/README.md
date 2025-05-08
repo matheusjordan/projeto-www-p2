@@ -1,35 +1,56 @@
-# client-app
+# Client App: Frontend da Aplicação de Chat
 
-This template should help get you started developing with Vue 3 in Vite.
+### Tecnologias Utilizadas
+- Vue 3
+- Vite
+- JavaScript (ES6+)
+- Vue Router
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
+### Estrutura do Projeto
+```
+client-app/
+├── src/
+│   ├── assets/          # Arquivos estáticos e estilos
+│   │   ├── base.css    # Estilos base da aplicação
+│   │   ├── main.css    # Estilos principais
+│   │
+│   ├── components/     # Componentes Vue reutilizáveis
+│   │   ├── NavBar.vue  # Barra de navegação
+│   │   ├── ChatPage.vue # Página principal de chat
+│   │   └── AboutMe.vue # Componente Sobre
+│   │
+│   ├── core/           # Arquivos principais da aplicação
+│   │   ├── http-client.js    # Cliente HTTP para requisições
+│   │   └── event-mitt.js     # Gerenciador de eventos
+│   │
+│   ├── router/         # Configuração de rotas
+│   │   └── index.js    # Definição das rotas da aplicação
+│   │
+│   ├── services/       # Serviços de API
+│   │   └── api-service.js    # Serviço de integração com a API
+│   │
+│   ├── App.vue         # Componente raiz da aplicação
+│   └── main.js         # Ponto de entrada da aplicação
 ```
 
-### Compile and Hot-Reload for Development
+### Principais Funcionalidades
+- Interface em formato de chat
+- Histórico de mensagens
+- Gerenciamento de chats
+- Navegação entre páginas
+- Sistema de eventos
 
-```sh
-npm run dev
-```
+### Integração com API
+A aplicação integra com os seguintes endpoints:
 
-### Compile and Minify for Production
+#### Chats
+- `POST /chats` - Criar novo chat
+- `GET /chats` - Listar todos os chats
+- `GET /chats/:id` - Buscar chat específico
+- `PATCH /chats/:id` - Atualizar nome do chat
+- `DELETE /chats/:id` - Deletar chat específico
+- `DELETE /chats` - Limpar todos os chats
 
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+#### Mensagens
+- `POST /messages` - Criar nova mensagem
+- `GET /messages/:chatId` - Listar mensagens de um chat

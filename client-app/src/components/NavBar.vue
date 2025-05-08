@@ -13,6 +13,7 @@ const getChats = async () => {
   
   const newNavItems = chats.map(item => {
     return {
+      id: item.id,
       label: `Nota: ${item.id}`,
       to: `/chat/${item.id}`
     }
@@ -30,22 +31,68 @@ const createChat = async () => {
   const newChat = await apiService.chats.create('Chat ' + new Date().toISOString());
   getChats()
 }
+
+const deleteChat = async (id) => {
+
+  if (confirm(`Tem certeza que deseja excluir a nota: ${id}?`)) {
+    await apiService.chats.delete(id);
+  }
+    
+  getChats()
+}
 </script>
 
 <template>
     <nav>
         <button @click="clearAll">Limpar Tudo</button>
         <button @click="createChat">Criar Chat</button>
-        <RouterLink v-for="item in navItems" :key="item.label" :to="item.to">{{ item.label }}</RouterLink>
-        <RouterLink to="/about">Sobre</RouterLink>
+        <div class="nav-item" v-for="item in navItems" :key="item.label">
+          <RouterLink class="nav-item-link" :to="item.to">{{ item.label }}</RouterLink>
+          <p class="delete-chat" @click="deleteChat(item.id)">excluir</p>
+        </div>
+        <RouterLink class="nav-item" to="/about">Sobre</RouterLink>
       </nav>
 </template>
 
 <style scoped>
 nav {
-    display: flex;
-    flex-flow: column;
-    min-width: 100px;
-    gap: 8px;
+  display: flex;
+  flex-flow: column;
+  min-width: 170px;
+  max-width: 170px;
+  gap: 8px;
+  padding: 8px;
+}
+
+.delete-chat {
+  color: red;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.delete-chat:hover {
+  opacity: 1;
+  border: 1px solid red;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.nav-item {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  gap: 4px;
+  height: 42px;
+
+  .nav-item-link {
+    width: 100%;
   }
+}
+
+.nav-item:hover {
+  border: 1px solid #fff;
+  border-radius: 4px;
+  padding: 4px;
+}
+
 </style>

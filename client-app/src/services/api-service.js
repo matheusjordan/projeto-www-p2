@@ -6,7 +6,7 @@ const apiService = {
         create: (name) => httpClient.post('/chats', { name }),
         getAll: () => httpClient.get('/chats'),
         getById: (id) => httpClient.get(`/chats/${id}`),
-        clear: (id) => httpClient.delete(`/chats/${id}`),
+        delete: (id) => httpClient.delete(`/chats/${id}`),
         clearAll: () => httpClient.delete('/chats')
     },
 

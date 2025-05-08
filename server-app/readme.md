@@ -39,6 +39,7 @@ server-app/
   - `getChats`: Lista todos os chats
   - `getChatById`: Busca um chat específico
   - `clearChat`: Limpa mensagens de um chat
+  - `deleteChat`: Deleta um chat
   - `clearAllChats`: Limpa todos os chats
 
 - **Repository**: Implementa o padrão Singleton para acesso aos dados

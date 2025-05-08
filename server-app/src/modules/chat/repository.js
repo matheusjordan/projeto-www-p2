@@ -18,6 +18,12 @@ class ChatRepository {
         return chats.find(chat => chat.id === id);
     }
 
+    async deleteChat(id) {
+        const chat = chats.find(chat => chat.id == id);
+        chats.splice(chats.indexOf(chat), 1);
+        return chat;
+    }
+
     async clearChat(chatId) {
         const chat = chats.find(chat => chat.id == chatId);
         chat.messages = [];

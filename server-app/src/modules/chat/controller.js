@@ -23,6 +23,11 @@ class ChatController {
         res.status(200).json(chat);
     }
 
+    async deleteChat(req, res) {
+        const chat = await chatRepository.deleteChat(req.params.id);
+        res.status(200).json(chat);
+    }
+
     async clearChat(req, res) {
         const chat = await chatRepository.clearChat(req.params.id);
         res.status(200).json(chat);

@@ -8,6 +8,11 @@ class ChatRepository {
 
     async insertMessage(chatId, message) {
         const chat = this.getChatById(chatId);
+
+        if (!chat) {
+            throw new Error('Chat not found');
+        }
+
         chat.messages.push(message);
         messages.push(message);
         return message;
@@ -15,6 +20,11 @@ class ChatRepository {
 
     async getMessages(chatId) {
         const chat = this.getChatById(chatId);
+
+        if (!chat) {
+            throw new Error('Chat not found');
+        }
+
         return chat.messages;
     }
 }

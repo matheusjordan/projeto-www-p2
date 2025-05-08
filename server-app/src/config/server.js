@@ -1,15 +1,23 @@
 require('dotenv').config();
+const routes = require('./server-routes');
 
 const express = require('express');
 const server = express();
-
 server.use(express.json());
-server.use(cors());
+server.use(cors({
+    origin: process.env.CORS_ORIGIN,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true
+}));
 
-const port = process.env.PORT || 3000;
+server.use('/api', routes);
 
-server.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+const runServer = () => {
+    const port = process.env.PORT || 3000;
 
-module.exports = server;
+    server.listen(port, () => {
+        console.log(`Server is running on port ${port}`);
+    });
+}
+
+module.exports = { runServer };

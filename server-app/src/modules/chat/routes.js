@@ -1,10 +1,10 @@
 const express = require('express');
-const ChatController = require('./controller');
+const chatController = require('./controller');
 
 class ChatRoutes {
     constructor() {
         this.router = express.Router();
-        this.chatController = new ChatController();
+        this.chatController = chatController;
 
         this.setupRoutes();
     }
@@ -22,4 +22,10 @@ class ChatRoutes {
     }
 }
 
-module.exports = ChatRoutes;
+let chatRoutes = null;
+
+if (!chatRoutes) {
+    chatRoutes = new ChatRoutes();
+}
+
+module.exports = chatRoutes.getRouter();

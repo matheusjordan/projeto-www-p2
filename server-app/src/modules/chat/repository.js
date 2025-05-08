@@ -30,4 +30,10 @@ class ChatRepository {
     }
 }
 
-module.exports = ChatRepository;
+let chatRepository = null;
+
+if (!chatRepository) {
+    chatRepository = new ChatRepository();
+}
+
+module.exports = chatRepository;

@@ -1,11 +1,11 @@
 const express = require('express');
 
-const MessageController = require('./controller');
+const messageController = require('./controller');
 
 class MessageRoutes {
     constructor() {
         this.router = express.Router();
-        this.messageController = new MessageController();
+        this.messageController = messageController;
 
         this.setupRoutes();
     }
@@ -20,4 +20,10 @@ class MessageRoutes {
     }
 }
 
-module.exports = MessageRoutes;
+let messageRoutes = null;
+
+if (!messageRoutes) {
+    messageRoutes = new MessageRoutes();
+}
+
+module.exports = messageRoutes.getRouter();

@@ -1,7 +1,8 @@
 require('dotenv').config();
 const routes = require('./server-routes');
-
+const cors = require('cors');
 const express = require('express');
+
 const server = express();
 server.use(express.json());
 server.use(cors({
@@ -10,7 +11,7 @@ server.use(cors({
     credentials: true
 }));
 
-server.use('/api', routes);
+server.use('/', routes);
 
 const runServer = () => {
     const port = process.env.PORT || 3000;

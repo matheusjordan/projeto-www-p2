@@ -1,6 +1,6 @@
 const { chats, messages } = require('../../database/db');
 
-class ChatRepository {
+class MessageRepository {
     constructor() {
         this.chats = chats;
         this.messages = messages;
@@ -29,4 +29,10 @@ class ChatRepository {
     }
 }
 
-module.exports = ChatRepository;
+let messageRepository = null;
+
+if (!messageRepository) {
+    messageRepository = new MessageRepository();
+}
+
+module.exports = messageRepository;

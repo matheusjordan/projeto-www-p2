@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-router.use('/chats', new ChatRoutes().getRouter());
-router.use('/messages', new MessageRoutes().getRouter());
+const chatRoutes = require('../modules/chat/routes');
+const messageRoutes = require('../modules/messages/routes');
+
+router.use('/chats', chatRoutes);
+router.use('/messages', messageRoutes);
 
 module.exports = router;

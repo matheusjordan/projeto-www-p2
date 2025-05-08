@@ -1,13 +1,10 @@
-const MessageRepository = require('./repository');
+const messageRepository = require('./repository');
 
 class MessageController {
-    constructor() {
-        this.messageRepository = new MessageRepository();
-    }
 
     async createMessage(req, res) {
         try {
-            const message = await this.messageRepository.insertMessage(req.body);
+            const message = await messageRepository.insertMessage(req.body);
             res.status(201).json(message);
         } catch (error) {
             res.status(404).json({ message: error.message });
@@ -16,7 +13,7 @@ class MessageController {
 
     async getMessages(req, res) {
         try {
-            const messages = await this.messageRepository.getMessages(req.params.chatId);
+            const messages = await messageRepository.getMessages(req.params.chatId);
             res.status(200).json(messages);
         } catch (error) {
             res.status(404).json({ message: error.message });
@@ -24,4 +21,10 @@ class MessageController {
     }
 }
 
-module.exports = MessageController;
+let messageController = null;
+
+if (!messageController) {
+    messageController = new MessageController();
+}
+
+module.exports = messageController;

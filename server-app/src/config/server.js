@@ -6,9 +6,8 @@ const express = require('express');
 const server = express();
 server.use(express.json());
 server.use(cors({
-    origin: process.env.CORS_ORIGIN,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
 server.use('/', routes);

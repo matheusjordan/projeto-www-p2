@@ -19,7 +19,7 @@ class MessageRepository {
     }
 
     async getMessages(chatId) {
-        const chat = chats.find(chat => chat.id === chatId);
+        const chat = chats.find(chat => chat.id == chatId)
 
         if (!chat) {
             throw new Error('Chat not found');

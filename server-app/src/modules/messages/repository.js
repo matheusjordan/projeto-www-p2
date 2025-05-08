@@ -1,25 +1,25 @@
 const { chats, messages } = require('../../database/db');
+const Message = require('./models');
+const { v4: uuidv4 } = require('uuid');
 
 class MessageRepository {
-    constructor() {
-        this.chats = chats;
-        this.messages = messages;
-    }
+    async insertMessage({chatId, message}) {
+        const chat = chats.find(chat => chat.id === chatId);
 
-    async insertMessage(chatId, message) {
-        const chat = this.getChatById(chatId);
-
+        console.log(message, chatId);
         if (!chat) {
             throw new Error('Chat not found');
         }
 
-        chat.messages.push(message);
-        messages.push(message);
+        const newMessage = new Message(uuidv4(), message, new Date().toISOString());
+
+        chat.messages.push(newMessage);
+        messages.push(newMessage);
         return message;
     }
 
     async getMessages(chatId) {
-        const chat = this.getChatById(chatId);
+        const chat = chats.find(chat => chat.id === chatId);
 
         if (!chat) {
             throw new Error('Chat not found');

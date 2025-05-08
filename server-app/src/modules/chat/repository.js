@@ -1,13 +1,16 @@
 const { chats } = require('../../database/db');
+const { v4: uuidv4 } = require('uuid');
+const Chat = require('./models');
 
 class ChatRepository {
     constructor() {
         this.chats = chats;
     }
 
-    async createChat(chat) {
-        this.chats.push(chat);
-        return chat;
+    async createChat(name) {
+        const newChat = new Chat(uuidv4(), name, [], new Date().toISOString());
+        this.chats.push(newChat);
+        return newChat;
     }
     
     async getChats() {

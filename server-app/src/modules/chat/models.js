@@ -1,7 +1,8 @@
 class Chat {
-    constructor(id, message, createdAt) {
+    constructor(id, name, messages, createdAt) {
         this.id = id;
-        this.message = message;
+        this.name = name;
+        this.messages = messages;
         this.createdAt = createdAt;
     }
 }

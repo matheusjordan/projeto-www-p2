@@ -1,0 +1,49 @@
+# Test Scenario 1: Message Operations ###
+
+### 1. Get messages for chat 1 (should return 2 messages)
+GET http://localhost:3000/messages/1
+
+### 2. Create a new message in chat 1
+POST http://localhost:3000/messages
+Content-Type: application/json
+
+{
+    "chatId": "1",
+    "message": "This is a new test message!"
+}
+
+### 3. Get messages for chat 1 again (should now return 3 messages)
+GET http://localhost:3000/messages/1
+
+# Test Scenario 2: Chat Operations ###
+
+### 1. Get all chats (should return 2 chats)
+GET http://localhost:3000/chats
+
+### 2. Get specific chat by ID
+GET http://localhost:3000/chats/1
+
+### 3. Create a new chat
+POST http://localhost:3000/chats
+Content-Type: application/json
+
+{
+    "message": "This is a new test chat!"
+}
+
+### 4. Get all chats again (should now return 3 chats)
+GET http://localhost:3000/chats
+
+#Test Scenario 3: Cleanup Operations ###
+
+### 1. Clear messages from chat 1
+DELETE http://localhost:3000/chats/1
+
+### 2. Verify chat 1 is empty
+GET http://localhost:3000/messages/1
+
+### 3. Clear all chats
+DELETE http://localhost:3000/chats
+
+### 4. Verify all chats are cleared
+GET http://localhost:3000/chats

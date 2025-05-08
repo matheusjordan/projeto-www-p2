@@ -44,24 +44,26 @@ const deleteChat = async (id) => {
 
 <template>
     <nav>
-        <button @click="clearAll">Limpar Tudo</button>
-        <button @click="createChat">Criar Chat</button>
-        <div class="nav-item" v-for="item in navItems" :key="item.label">
-          <RouterLink class="nav-item-link" :to="item.to">{{ item.label }}</RouterLink>
-          <p class="delete-chat" @click="deleteChat(item.id)">excluir</p>
-        </div>
-        <RouterLink class="nav-item" to="/about">Sobre</RouterLink>
-      </nav>
+      <RouterLink class="nav-item" to="/about">Sobre</RouterLink>
+      <button @click="clearAll">Limpar Tudo</button>
+      <button @click="createChat">Criar Chat</button>
+      <div class="nav-item" v-for="item in navItems" :key="item.label">
+        <RouterLink class="nav-item-link" :to="item.to">{{ item.label }}</RouterLink>
+        <p class="delete-chat" @click="deleteChat(item.id)">excluir</p>
+      </div>
+    </nav>
 </template>
 
 <style scoped>
 nav {
   display: flex;
-  flex-flow: column;
+  flex-flow: column-reverse;
   min-width: 170px;
   max-width: 170px;
   gap: 8px;
   padding: 8px;
+  border-right: 1px solid #ccc;
+
 }
 
 .delete-chat {
@@ -81,6 +83,7 @@ nav {
   display: flex;
   flex-flow: row;
   justify-content: space-between;
+  align-items: center;
   gap: 4px;
   height: 42px;
 

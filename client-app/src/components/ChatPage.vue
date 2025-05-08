@@ -37,13 +37,15 @@ onMounted(() => {
 </script>
 
 <template>
-    <div>
+    <div class="chat-header">
         <h1>Nota {{ chatId }}</h1>
     </div>
 
     <div class="msg-container" v-if="chat.messages.length > 0">
-        <div class="msg-item" v-for="message in chat.messages" :key="message.id">
+        <div class="messages">
+            <div class="msg-item" v-for="message in chat.messages" :key="message.id">
             <p>{{ message.message }}</p>
+        </div>
         </div>
     </div>
     <div class="msg-container" v-else>
@@ -59,4 +61,41 @@ onMounted(() => {
 
 <style scoped>
 
+.messages {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+}
+
+.msg-container {
+    padding: 10px;
+    overflow: scroll;
+}
+
+.msg-input {
+    display: flex;
+    flex-flow: row;
+    margin-top: auto;
+    gap: 10px;
+    border-top: 1px solid #ccc;
+    padding: 10px;
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    
+}
+
+.msg-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.chat-header {
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+}
 </style>

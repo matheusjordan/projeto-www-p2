@@ -21,5 +21,13 @@ import NavBar from './components/NavBar.vue'
 .container {
   display: flex;
   flex-flow: row;
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+  width: 100%;
 }
 </style>

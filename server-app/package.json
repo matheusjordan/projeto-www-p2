@@ -1,0 +1,11 @@
+{
+  "name": "chat-app-server",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Matheus Jordan",
+  "license": "ISC",
+  "description": "Aplicação de Chat para disciplina de Desenvolvimento Web"
+}

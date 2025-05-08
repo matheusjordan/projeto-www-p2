@@ -1,17 +1,34 @@
 <script setup>
-const navItems = [
-  {
-    label: 'Chat 3',
-    to: '/chat/3'
-  }
-]
+import { onMounted, ref } from 'vue'
+import apiService from '../services/api-service'
 
-const clearAll = () => {
-    console.log('NEED TO CLEAR ALL CHAT NOTES')
+const navItems = ref([])
+
+onMounted(() => {
+    getChats()
+})
+
+const getChats = async () => {
+  const chats = await apiService.chats.getAll();
+  
+  const newNavItems = chats.map(item => {
+    return {
+      label: `Nota: ${item.id}`,
+      to: `/chat/${item.id}`
+    }
+  })
+
+  navItems.value = newNavItems
 }
 
-const createChat = () => {
-    console.log('NEED TO CREATE A NEW CHAT')
+const clearAll = async () => {
+  await apiService.chats.clearAll();
+  getChats()
+}
+
+const createChat = async () => {
+  const newChat = await apiService.chats.create('Chat ' + new Date().toISOString());
+  getChats()
 }
 </script>
 

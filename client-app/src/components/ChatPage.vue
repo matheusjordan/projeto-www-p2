@@ -1,33 +1,38 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, onUpdated, ref, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
-
+import apiService from '../services/api-service'
 const route = useRoute()
-const chatId = route.params.id
+const chatId = ref(route.params.id)
 const inputMessage = ref("");
 
-const chat = {
-    id: chatId,
-    name: 'Chat ' + chatId,
-    messages: [
-        {
-            id: 1,
-            message: 'Nota 1'
-        },
-        {
-            id: 2,
-            message: 'Nota 2'
-        }
-    ]
-}
+const chat = reactive({
+    id: chatId.value,
+    name: 'Chat ' + chatId.value,
+    messages: []
+})
 
-const sendMessage = () => {
-    console.log('NEED TO SEND MESSAGE: ' + inputMessage.value)
+const sendMessage = async () => {
+    await apiService.messages.create({
+        chatId: chatId.value,
+        message: inputMessage.value
+    })
+    getMessages()
     inputMessage.value = ""
 }
 
+const getMessages = async () => {
+    const messages = await apiService.messages.getByChatId(chatId.value)
+    chat.messages = messages
+}
+
+watch(() => route.params.id, async () => {
+    chatId.value = route.params.id
+    getMessages()
+})
+
 onMounted(() => {
-    console.log('NEED TO GET ALL MESSAGES FROM CHAT ID: ' + chatId)
+    getMessages()
 })
 </script>
 
@@ -36,10 +41,13 @@ onMounted(() => {
         <h1>Nota {{ chatId }}</h1>
     </div>
 
-    <div class="msg-container">
+    <div class="msg-container" v-if="chat.messages.length > 0">
         <div class="msg-item" v-for="message in chat.messages" :key="message.id">
             <p>{{ message.message }}</p>
         </div>
+    </div>
+    <div class="msg-container" v-else>
+        <p>Nenhuma mensagem encontrada</p>
     </div>
 
     <div class="msg-input">

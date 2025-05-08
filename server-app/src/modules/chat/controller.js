@@ -37,6 +37,11 @@ class ChatController {
         const chats = await chatRepository.clearAllChats();
         res.status(200).json(chats);
     }
+
+    async updateChatName(req, res) {
+        const chat = await chatRepository.updateChatName(req.params.id, req.body.name);
+        res.status(200).json(chat);
+    }
 }
 
 let chatController = null;

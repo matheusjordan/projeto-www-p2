@@ -41,7 +41,7 @@ server-app/
   - `clearChat`: Limpa mensagens de um chat
   - `deleteChat`: Deleta um chat
   - `clearAllChats`: Limpa todos os chats
-
+  - `updateChatName`: Atualiza o nome de um chat
 - **Repository**: Implementa o padrão Singleton para acesso aos dados
   - Gerencia operações CRUD para chats
   - Mantém uma única instância do repositório

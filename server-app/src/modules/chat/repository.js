@@ -34,6 +34,12 @@ class ChatRepository {
         chats.splice(0, chats.length);
         return chats;
     }
+
+    async updateChatName(id, name) {
+        const chat = chats.find(chat => chat.id == id);
+        chat.name = name;
+        return chat;
+    }
 }
 
 let chatRepository = null;

@@ -19,6 +19,7 @@ class ChatRoutes {
         this.router.get('/:id', this.chatController.getChatById);
         this.router.delete('/:id', this.chatController.deleteChat);
         this.router.delete('/', this.chatController.clearAllChats);
+        this.router.patch('/:id', this.chatController.updateChatName);
     }
 }
 

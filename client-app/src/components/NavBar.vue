@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import apiService from '../services/api-service'
-
+import eventMitt from '../core/event-mitt'
 const navItems = ref([])
 
 onMounted(() => {
@@ -14,8 +14,8 @@ const getChats = async () => {
   const newNavItems = chats.map(item => {
     return {
       id: item.id,
-      label: `Nota: ${item.id}`,
-      to: `/chat/${item.id}`
+      label: `${item.name}`,
+      to: `/chat/${item.id}/${item.name}`
     }
   })
 
@@ -28,7 +28,7 @@ const clearAll = async () => {
 }
 
 const createChat = async () => {
-  const newChat = await apiService.chats.create('Chat ' + new Date().toISOString());
+  await apiService.chats.create('Chat ' + new Date().toISOString());
   getChats()
 }
 
@@ -40,6 +40,10 @@ const deleteChat = async (id) => {
     
   getChats()
 }
+
+eventMitt.on$('chat-updated', () => {
+  getChats()
+})
 </script>
 
 <template>
@@ -58,8 +62,8 @@ const deleteChat = async (id) => {
 nav {
   display: flex;
   flex-flow: column-reverse;
-  min-width: 170px;
-  max-width: 170px;
+  min-width: 220px;
+  max-width: 220px;
   gap: 8px;
   padding: 8px;
   border-right: 1px solid #ccc;
@@ -70,6 +74,8 @@ nav {
   color: red;
   cursor: pointer;
   opacity: 0;
+  min-width: 20px;
+  text-align: right;
 }
 
 .delete-chat:hover {
@@ -77,6 +83,8 @@ nav {
   border: 1px solid red;
   border-radius: 4px;
   padding: 4px;
+  min-width: 54px;
+
 }
 
 .nav-item {
@@ -87,8 +95,14 @@ nav {
   gap: 4px;
   height: 42px;
 
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   .nav-item-link {
     width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

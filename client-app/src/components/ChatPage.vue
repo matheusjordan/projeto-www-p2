@@ -1,10 +1,14 @@
 <script setup>
-import { onMounted, onUpdated, ref, reactive, watch } from 'vue'
+import { onMounted, ref, reactive, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import apiService from '../services/api-service'
+import eventMitt from '../core/event-mitt'
 const route = useRoute()
 const chatId = ref(route.params.id)
+const chatName = ref(route.params.name)
+
 const inputMessage = ref("");
+const editMode = ref(false)
 
 const chat = reactive({
     id: chatId.value,
@@ -26,8 +30,19 @@ const getMessages = async () => {
     chat.messages = messages
 }
 
+const editChat = () => {
+    editMode.value = true
+}
+
+const saveChat = async () => {
+    await apiService.chats.updateName(chatId.value, chatName.value) 
+    editMode.value = false
+    eventMitt.emit$('chat-updated', true)
+}
+
 watch(() => route.params.id, async () => {
     chatId.value = route.params.id
+    chatName.value = route.params.name
     getMessages()
 })
 
@@ -37,8 +52,15 @@ onMounted(() => {
 </script>
 
 <template>
-    <div class="chat-header">
-        <h1>Nota {{ chatId }}</h1>
+    <div class="chat-header" v-if="!editMode">
+        <h1>{{ chatName }}</h1>
+        <button @click="editChat">Editar Título</button>
+    </div>
+    <div class="chat-header" v-else>
+        <div class="chat-header-input-container">
+            <input class="chat-header-input" v-model="chatName" type="text" placeholder="Digite o título da nota">
+        <button @click="saveChat">Salvar</button>
+        </div>
     </div>
 
     <div class="msg-container" v-if="chat.messages.length > 0">
@@ -70,6 +92,19 @@ onMounted(() => {
 .msg-container {
     padding: 10px;
     overflow: scroll;
+}
+
+.chat-header-input-container {
+    display: flex;
+    flex-flow: row;
+    gap: 10px;
+}
+
+.chat-header-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .msg-input {

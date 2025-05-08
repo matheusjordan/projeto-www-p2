@@ -25,6 +25,16 @@ const httpClient = {
         })
         return response.json()
     },
+    patch: async (url, data) => {
+        const response = await fetch(`${BASE_URL}${url}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        return response.json()
+    },
     delete: async (url) => {
         const response = await fetch(`${BASE_URL}${url}`, {
             method: 'DELETE'

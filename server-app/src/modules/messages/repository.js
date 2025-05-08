@@ -1,4 +1,4 @@
-const { chats, messages } = require('../db');
+const { chats, messages } = require('../../database/db');
 
 class ChatRepository {
     constructor() {

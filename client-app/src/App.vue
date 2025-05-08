@@ -1,6 +1,11 @@
 <script setup>
+import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import NavBar from './components/NavBar.vue'
+
+onMounted(() => {
+  console.log('NEED TO GET ALL CHAT NOTES')  
+})
 </script>
 
 <template>

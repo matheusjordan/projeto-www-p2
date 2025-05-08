@@ -5,12 +5,20 @@ const navItems = [
     to: '/chat/3'
   }
 ]
+
+const clearAll = () => {
+    console.log('NEED TO CLEAR ALL CHAT NOTES')
+}
+
+const createChat = () => {
+    console.log('NEED TO CREATE A NEW CHAT')
+}
 </script>
 
 <template>
     <nav>
-        <button>Limpar Tudo</button>
-        <button>Criar Chat</button>
+        <button @click="clearAll">Limpar Tudo</button>
+        <button @click="createChat">Criar Chat</button>
         <RouterLink v-for="item in navItems" :key="item.label" :to="item.to">{{ item.label }}</RouterLink>
         <RouterLink to="/about">Sobre</RouterLink>
       </nav>

@@ -1,8 +1,10 @@
 <script setup>
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
 const chatId = route.params.id
+const inputMessage = ref("");
 
 const chat = {
     id: chatId,
@@ -19,6 +21,14 @@ const chat = {
     ]
 }
 
+const sendMessage = () => {
+    console.log('NEED TO SEND MESSAGE: ' + inputMessage.value)
+    inputMessage.value = ""
+}
+
+onMounted(() => {
+    console.log('NEED TO GET ALL MESSAGES FROM CHAT ID: ' + chatId)
+})
 </script>
 
 <template>
@@ -33,8 +43,8 @@ const chat = {
     </div>
 
     <div class="msg-input">
-        <input type="text" placeholder="Digite sua mensagem">
-        <button >Enviar</button>
+        <input v-model="inputMessage" type="text" placeholder="Digite sua mensagem">
+        <button @click="sendMessage">Enviar</button>
     </div>
 
 </template>

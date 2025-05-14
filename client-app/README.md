@@ -10,24 +10,24 @@
 ```
 client-app/
 ├── src/
-│   ├── assets/          # Arquivos estáticos e estilos
-│   │   ├── base.css    # Estilos base da aplicação
-│   │   ├── main.css    # Estilos principais
+│   ├── assets/             # Estilos da aplicação
+│   │   ├── base.css            # Estilos base da aplicação
+│   │   ├── main.css            # Estilos principais
 │   │
-│   ├── components/     # Componentes Vue reutilizáveis
-│   │   ├── NavBar.vue  # Barra de navegação
-│   │   ├── ChatPage.vue # Página principal de chat
-│   │   └── AboutMe.vue # Componente Sobre
+│   ├── components/         # Componentes Vue reutilizáveis
+│   │   ├── NavBar.vue          # Barra de navegação
+│   │   ├── ChatPage.vue        # Página principal de chat
+│   │   └── AboutMe.vue         # Componente Sobre
 │   │
-│   ├── core/           # Arquivos principais da aplicação
-│   │   ├── http-client.js    # Cliente HTTP para requisições
-│   │   └── event-mitt.js     # Gerenciador de eventos
+│   ├── core/               # Arquivos principais da aplicação
+│   │   ├── http-client.js    # Serviço para requisições HTTP 
+│   │   └── event-mitt.js     # Gerenciador de eventos assíncronos
 │   │
-│   ├── router/         # Configuração de rotas
-│   │   └── index.js    # Definição das rotas da aplicação
+│   ├── router/             # Configuração de rotas
+│   │   └── index.js            # Definição das rotas da aplicação
 │   │
-│   ├── services/       # Serviços de API
-│   │   └── api-service.js    # Serviço de integração com a API
+│   ├── services/           # Serviços de API
+│   │   └── api-service.js      # Serviço HTTP de requisições a API
 │   │
 │   ├── App.vue         # Componente raiz da aplicação
 │   └── main.js         # Ponto de entrada da aplicação

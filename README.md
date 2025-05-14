@@ -54,4 +54,4 @@ Este repositório contém 2 projetos que trabalham em conjunto para criar uma ap
 
 Para mais detalhes sobre cada projeto, consulte seus respectivos READMEs:
 - [Client App README](./client-app/README.md)
-- [Server App README](./server-app/readme.md)
+- [Server App README](./server-app/README.md)

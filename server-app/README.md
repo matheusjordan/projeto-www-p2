@@ -11,24 +11,36 @@ Projeto de API Rest com Node.js e Express para gerenciamento de chats e mensagen
 ```
 server-app/
 ├── src/
-│   ├── config/           # Configurações da aplicação
-│   │   └── server-routes.js
+│   ├── config/              # Camada de Configuração da Aplicação
+│   │   └── server-routes.js     # Configuração de Rotas
+|   |   └── server.js            # Configuração do Server
 │   │   
-│   ├── database/         # Camada de persistência
-│   │   └── db.js
+│   ├── database/            # Camada de persistência
+│   │   └── db.js                # Base de dados
 │   │   
-│   ├── modules/          # Módulos da aplicação
-│   │   ├── chat/        # Módulo de Chats
+│   ├── modules/             # Módulos da aplicação 
+│   │   ├── chat/
 │   │   │   ├── controller.js
 │   │   │   ├── models.js
 │   │   │   ├── repository.js
 │   │   │   └── routes.js
-│   │   └── messages/    # Módulo de Mensagens
+│   │   └── messages/
 │   │       ├── controller.js
 │   │       ├── models.js
 │   │       ├── repository.js
 │   │       └── routes.js
-│   └── tests.http       # Testes da API
+│   └── tests.http            # Testes da API
+```
+
+### Estrutura dos Módulos
+```
+modules/
+├── chat/
+│   ├── controller.js   # Responsável por processar as requisições HTTP
+│   ├── models.js       # Modelo de dados do módulo
+│   ├── repository.js   # Responsável por persistir dados na base de dados
+│   └── routes.js       # Configuração de do módulo
+...
 ```
 
 ### Principais Classes
@@ -42,6 +54,7 @@ server-app/
   - `deleteChat`: Deleta um chat
   - `clearAllChats`: Limpa todos os chats
   - `updateChatName`: Atualiza o nome de um chat
+
 - **Repository**: Implementa o padrão Singleton para acesso aos dados
   - Gerencia operações CRUD para chats
   - Mantém uma única instância do repositório
@@ -61,7 +74,7 @@ server-app/
   - `getMessages`: Lista mensagens de um chat específico
 
 - **Repository**: Implementa o padrão Singleton para acesso aos dados
-  - Gerencia operações CRUD para mensagens
+  - Gerencia operações para mensagens
   - Mantém uma única instância do repositório
 
 - **Model**: Define a estrutura de uma mensagem
@@ -82,6 +95,7 @@ server-app/
 - `GET /chats/:id` - Buscar chat específico
 - `DELETE /chats/:id` - Limpar chat específico
 - `DELETE /chats` - Limpar todos os chats
+- `PATCH /chats/:id` - Atualiza o nome de um chat
 
 #### Mensagens
 - `POST /messages` - Criar nova mensagem

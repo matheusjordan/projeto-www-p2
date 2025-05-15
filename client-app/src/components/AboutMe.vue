@@ -1,6 +1,18 @@
 <template>
   <div class="about">
-    <h1>Desenvolvedor por: <a href="https://github.com/matheusjordan">Matheus Jordan</a></h1>
+    <h1>Desenvolvedor por: <a href="https://github.com/matheusjordan">
+      <ul>
+        <li>
+          Gabriel Barros
+        </li>
+        <li>
+          Matheus Donato
+        </li>
+        <li>
+          Matheus Jordan
+        </li>
+      </ul>
+    </a></h1>
     <hr>
     <br>
     <p>Neste projeto onde você pode criar notas em formato de chat.</p>
